@@ -16,7 +16,7 @@
     birdY: 0,
     birdVelocity: 0,
     gravity: 0.45,
-    jumpStrength: -8.5,
+    jumpStrength: -7.1,
     pipeSpeed: 2.4,
     pipeWidth: 68,
     pipeGap: 170,
