@@ -1,0 +1,179 @@
+:root {
+  --game-width: 420px;
+  --game-height: 680px;
+  --ground-height: 110px;
+  --sky-top: #89d7ff;
+  --sky-mid: #b7e7ff;
+  --sky-bottom: #d7f4ff;
+  --pipe-main: #34a853;
+  --pipe-shadow: #278443;
+  --pipe-cap: #2d9548;
+  --bird-main: #ffd04f;
+  --bird-accent: #ff9e3d;
+  --ink: #1a2a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(160deg, #e7f9ff, #c7ebff);
+}
+
+.app {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.game-title {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+}
+
+.game {
+  position: relative;
+  width: min(var(--game-width), 95vw);
+  height: min(var(--game-height), 85vh);
+  overflow: hidden;
+  border: 3px solid #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 14px 28px rgba(5, 44, 68, 0.28);
+  background: linear-gradient(to bottom, var(--sky-top), var(--sky-mid), var(--sky-bottom));
+}
+
+.score-board {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  text-align: center;
+  min-width: 180px;
+}
+
+.pipes {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.pipe {
+  position: absolute;
+  width: 68px;
+  background: linear-gradient(to right, var(--pipe-main), var(--pipe-shadow));
+  border: 2px solid #1f6b36;
+}
+
+.pipe-top {
+  top: 0;
+  border-bottom: none;
+  border-radius: 0 0 10px 10px;
+}
+
+.pipe-bottom {
+  border-top: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.pipe::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: 16px;
+  border-radius: 8px;
+  background: var(--pipe-cap);
+  border: 2px solid #1f6b36;
+}
+
+.pipe-top::after {
+  bottom: 0;
+}
+
+.pipe-bottom::after {
+  top: 0;
+}
+
+.bird {
+  position: absolute;
+  z-index: 3;
+  width: 38px;
+  height: 30px;
+  border-radius: 50% 45% 45% 50%;
+  background: radial-gradient(circle at 32% 30%, #fff4bf 0, var(--bird-main) 45%, var(--bird-accent) 100%);
+  border: 2px solid #e08b29;
+  box-shadow: 0 4px 0 rgba(208, 117, 34, 0.45);
+}
+
+.bird::before {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 10px;
+  width: 12px;
+  height: 10px;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  background: #ff8e2a;
+}
+
+.bird::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #202020;
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--ground-height);
+  z-index: 3;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #ca9f57 0,
+      #ca9f57 14px,
+      #c1944b 14px,
+      #c1944b 28px
+    );
+  border-top: 4px solid #98773f;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 2.9vw, 1.5rem);
+  line-height: 1.4;
+  white-space: pre-line;
+  color: #11344f;
+  background: rgba(248, 254, 255, 0.66);
+}
+
+.overlay.hidden {
+  display: none;
+}
